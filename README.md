@@ -29,7 +29,7 @@ XMLElement(tag: str, value = '', props={}, master = None, onetag=False)
 
 * tag: the tag's equivalent value in HTML
 * value: what goes inside of the tags (if there are two tags)
-* props: a dictionary of the properties the tag should have (e.g. `<div id='foo'></div>` gets turned into `e('div', props={'id': 'foo'}))
+* props: a dictionary of the properties the tag should have (e.g. `<div id='foo'></div>` gets turned into `e('div', props={'id': 'foo'}`))
 * master: DON'T USE
 * onetag: whether the tag should be closed in one tag or not (<OneTag/> compared to <TwoTags></TwoTags>)
 
