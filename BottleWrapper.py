@@ -26,9 +26,19 @@ class XMLElement:
         return self.repr
     def __add__(self, obj):
         return XMLElement(self.tag, self.children + [obj], props = self.props, onetag=self.onetag)
+    def findById(self, objId):
+        ans = None
+        try:
+            if self.props['id'] == objId:
+                return self
+        except:
+            pass
+        for x in self.children:
+            if type(x) == XMLElement:
+                ans = x.findById(objId)
+        return ans
 
 def runHTML(element: XMLElement, r):
-    assert(element.tag == 'html')
     @route(r)
     def bottleWrapper():
         return element.repr
