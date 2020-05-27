@@ -23,11 +23,12 @@ runHTML(master)
 ```
 
 This results in the following:
-
-<h1>An Example</h1>
-<p>This is how you give objects values!</p>
-<div>
-    <p>To give values to divs and other containers, you need to add other elements to it</p>
+<div style="border: 0.25ex; padding: 1ex">
+    <h1>An Example</h1>
+    <p>This is how you give objects values!</p>
+    <div>
+        <p>To give values to divs and other containers, you need to add other elements to it</p>
+    </div>
 </div>
 
 #### Inputs
@@ -53,6 +54,7 @@ XMLElement(tag: str, value = '', props={}, master = None, onetag=False)
 
 ### Form
 > Please note that this feature doesn't work yet. 
+
 The `Form` object represents a form. It takes a frontend, with a submit button, and code to be run with the backend. 
 
 #### Inputs
