@@ -22,6 +22,14 @@ master += body
 runHTML(master)
 ```
 
+This results in the following:
+
+<h1>An Example</h1>
+<p>This is how you give objects values!</p>
+<div>
+    <p>To give values to divs and other containers, you need to add other elements to it</p>
+</div>
+
 #### Inputs
 ```python
 XMLElement(tag: str, value = '', props={}, master = None, onetag=False)
@@ -31,8 +39,34 @@ XMLElement(tag: str, value = '', props={}, master = None, onetag=False)
 * value: what goes inside of the tags (if there are two tags)
 * props: a dictionary of the properties the tag should have (e.g. `<div id='foo'></div>` gets turned into `e('div', props={'id': 'foo'}`))
 * master: DON'T USE
-* onetag: whether the tag should be closed in one tag or not (<OneTag/> compared to <TwoTags></TwoTags>)
+* onetag: whether the tag should be closed in one tag or not (`<OneTag/>` compared to `<TwoTags></TwoTags>`)
+
+#### Attributes
+* `e.tag`: the element's tag
+* `e.props`: a dictionary of the element's properties
+* `e.onetag`: whether the tag is one tag or two
+* `e.children`: the element's children; in other words, what is inside of an element
+* `e.repr`: the element's HTML representation
+
+#### Methods
+* `e.findById(objId)`: finds the element with the id property set to `objId`
+
+### Form
+> Please note that this feature doesn't work yet. 
+The `Form` object represents a form. It takes a frontend, with a submit button, and code to be run with the backend. 
+
+#### Inputs
+```python
+Form(UI: XMLElement, serverside: function, r: str)
+```
+
+* XMLElement: the UI for the form
+* serverside: a function which takes a request object and does stuff
+
+### Style
+> This is not yet implemented
 
 ## Functions
 ### Running the code
 As you can see in the example above, the last line is what runs the code. runHTML takes an XMLElement and runs it as HTML. 
+> This module runs code by transforming it into HTML. You can access this transformation by calling `e.repr` on an XMLElement e.

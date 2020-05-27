@@ -38,23 +38,63 @@ class XMLElement:
                 ans = x.findById(objId)
         return ans
 
-def runHTML(element: XMLElement, r):
-    @route(r)
-    def bottleWrapper():
-        return element.repr
-    run()
+class Form(XMLElement):
+    """Pythonic representation of a Form."""
+    def __init__(self, UI: XMLElement, serverside, r):
+        """Creates a form from a frontend and code that is to be run with the answers"""
+        super().__init__('form', props={
+            'action': r,
+            'method': 'post'
+        })
+        @route(r)
+        def UIInterface():
+            return UI.repr
+        @post(r)
+        def ServersideInterface():
+            args = request.forms
+            return serverside(args)
+        
+
+class Scripts:
+    def __init__(self):
+        self.history = []
+    def runHTML(self, element: XMLElement, r: str):
+        self.history.append({'name': 'runHTML', 'function': self.runHTML})
+        @route(r)
+        def bottleWrapper():
+            return element.repr
+        run()
 
 def main():
+    client = Scripts()
     e = XMLElement
     h = e('html')
     body = e('body')
     body += e('h1', 'let\'s see if this works')
-    div1 = e('div')
-    div1 += e('h2', 'Vunderbar!!!')
-    div1 += e('p', 'Viola!')
-    body += div1
+    div = e('div')
+    div += Form(
+        e(
+            'input', 
+            props={
+                'name': 'WhoIAm',
+                'type': 'text'
+            },
+            onetag=True
+        ) + e(
+            'input',
+            props={
+                'value': 'Let\'s see',
+                'type': 'submit'
+            }
+        ),
+        (lambda args:
+            e('p', 'You are me!') if args.get('name') == "ME!" else e('p', 'YOU ARE NOT ME!!!')
+        ),
+        '/'
+    )
+    body += div
     h += body
-    runHTML(h, '/')
+    client.runHTML(h, '/')
 
 if __name__ == "__main__":
     main()
