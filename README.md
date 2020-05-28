@@ -2,7 +2,10 @@
 This module creates a pythonic wrapper for Bottle
 
 # Motivation
-Bottle was and is my favorite web framework. But I had, since the beginning, had observed something which I didn't like: Bottle's reliance on HTML. This made bottle very bad for shell scripting and such things. Thus, I created a module which allowes XML (and by extension, HTML) documents to be easily created and run on a server. 
+Bottle was and is my favorite web framework. But I had, since the beginning, had observed something which I didn't like: Bottle's reliance on HTML. This made bottle very bad for shell scripting and such things. Thus, I created a module which allowes XML (and by extension, HTML) documents to be easily created and run on a server.
+
+# Run on repl.it
+[![Run on Repl.it](https://repl.it/badge/github/techieji/Bottle-Wrapper)](https://repl.it/github/techieji/Bottle-Wrapper)
 
 # Items
 ## Objects
