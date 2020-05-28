@@ -53,7 +53,21 @@ class Form(XMLElement):
         def ServersideInterface():
             args = request.forms
             return serverside(args)
-        
+
+class ObjStyle:
+    def __init__(self, attributes, tag, idName=None, className=None):
+        self.tag = tag
+        self.attributes = attributes
+        self.id = idName
+        selectorString = f"{tag}{'.' + className if className else ''}{'#' + idName if idName else ''}"
+        adjustedatts = ""
+        for x in attributes:
+            adjustedatts += f"{x}: {attributes[x]};\n"
+        self.repr = f"{selectorString} {self.attributes}"
+
+class Style(XMLElement):
+    def __init__(self, objstyles: list):
+        super().__init__('style', "\n".join(objstyles))
 
 class Scripts:
     def __init__(self):
@@ -72,6 +86,7 @@ def main():
     body = e('body')
     body += e('h1', 'let\'s see if this works')
     div = e('div')
+    '''
     div += Form(
         e(
             'input', 
@@ -91,7 +106,7 @@ def main():
             e('p', 'You are me!') if args.get('name') == "ME!" else e('p', 'YOU ARE NOT ME!!!')
         ),
         '/'
-    )
+    )'''
     body += div
     h += body
     client.runHTML(h, '/')
